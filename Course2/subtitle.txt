@@ -1,0 +1,85 @@
+With the Matplotlib magic
+having set the back end for us, we're going to start our plotting journey
+by making a graph using the plot function. A plot has two axis. An x-axis, along the horizon, and
+a y-axis, which runs vertically. First, let's import the pyplot
+scripting layer as plt. All of the functions which we'll
+run against the pyplot module are part of the scripting
+layer of the architecture. Let's take a look at the plot
+function by looking at the docstring. If you're not used to seeing it, this kind
+of python function declaration with two arguments, the star args and the double
+star kw args, can be a bit obscure. What's being said here by the star args is
+that the function supports any number of unnamed arguments. The DubStar Q also means that it
+supports any number of named arguments. This makes the function declaration very
+flexible since you can pass in basically any number of arguments, named or not. But it makes it difficult to know
+what is an appropriate argument. Reading on, we see that the arguments
+will be interpreted as X, Y pairs. So let's try with just one
+data point at position (3, 2). Here we see that the return
+value is aligned to the object. And we see our first figure appear. We don't see any data points though,
+which is a bit odd. It turns out that the third
+argument should be a string, which signifies how we want
+that data point to be rendered. Let's use a period for a dot and
+we'll see that our data point shows up. There we go. You'll notice that the subsequent
+costs of plot have actually updated our visualization. This is a particular feature
+of this interactive back end. Other back ends might not. For instance, you might see some web
+tutorials using the older percent matplotlib in line magic instead of
+the percent matplotlib notebook magic. The inline magic is not interactive. Subsequent cause create new plots
+as new cells in the notebook. This can be handy too. I think here's where some of the confusion with matplotlib as a library
+tends to come from. In the last lecture, I explained
+that there's an artist layer, and that it is figures,
+with subplots and axes and data points which are rendered
+as patches onto these axes. But we haven't seen any of that here. Instead we've just called one
+function on a module named plot. So what's going on? You see, the pie plot scripting interface
+is managing a lot of objects for you. It keeps track of the latest figure,
+of sub plots and of the axis objects. Moreover, it actually hides some of
+these behind methods of its own. So, the pie plot module itself has
+a function which is called plot. But it redirects calls to this
+function to the current axis object. This makes for
+a significant learning curve and you'll see many discussions in web
+tutorials stack overflow where people are confused by these two different
+approaches to making figures show up. So let's take a look at a comparable
+approach that's a bit more verbose. And some people would call this
+the matplotlib object API. But I think it's more accurate to
+think of it as directly interfacing with the artist layer instead. First I'm going to import a new
+backend called FigureCanvasAgg I don't have to use the modular level use
+function since we're not calling this from the scripting API. All to import the figure object. Then we'll go ahead and create a new
+figure and associate it with the backend. We can then add a subplot
+directly to this. We're going to talk more about subplots
+in a future lecture but this number, 111, actually means that we just want one plot. The return value for the subplot is the axes object,
+which contains methods for plotting. So, we can plot our image as per usual. Now, the backend that we're using, the one for the jupiter notebooks,
+isn't able to render this directly. Since it expects the scripting layer pie
+plot to have created all of the objects. So here, we'll save the figure
+to a png file instead. Then we'll do a quick html cell magic and
+execute that, and see the rendered image. That's a lot more work than
+using the scripting layer. The scripting layer, though, isn't magic, it's just doing some
+of the behind the scenes work for us. For instance,
+when we make a call to pyplot's plot.plot, the scripting layer actually looks to see
+if there's a figure that currently exists and if not, it creates a new one. It then returns the axis for this figure. We can actually get access to the figure
+using the GCF function, which stands for get current figure, of Pi Plot, and get access to the axes as well using
+the GCA function, get current axes. Okay, let's create a new
+figure with Pi Plot. This means it won't update our
+figure at the top of this file. Then let's make a plot, grab the axes,
+and set the x and y limits. We can do this using the axis function. This function takes four
+parameters: a minimum value for x, which we'll put at zero, a maximum
+value for x, which we'll put it at six. In corresponding minimum and maximum
+values for Y which we'll put it zero and 10. Since we're doing this
+with the scripting layer once we run the jupiter cell it render
+to the NBA back end as we might expect. All right, one more demonstration on the
+fundamentals of putting together a plot. You can add artists to
+an axes object at any time. Pi plot i doing that for
+us when we call the plot function. It's determining what shape we want from
+the string, the location associate with that shape, then it's creating a patch
+object and adding that to the axes. If we make subsequent calls to
+the plot function this will add more data to our chart. You can see that when this is done, the
+points are rendered in different colors. As the axis recognizes them
+as different data series. We can go further with the axis object
+to the point where we can actually get all of the child objects
+that that axis contains. We do this with the axis
+get children function. Here we can see that there's actually
+three line 2D objects contained in this axis. These are our data points. The number of spines, which are actual
+renderings of the borders of the frame, including tic markers,
+two axis objects, and a bunch of text,
+which are the labels for the chart. There's even a rectangle,
+which is the background for the axis. Okay. There is a whirlwind tour of how to
+be productive with matplotlib and make your first chart. In the next lecture, we're going to go
+through some of the different built in charting options which
+are available to us.
