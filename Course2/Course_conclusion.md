@@ -55,13 +55,15 @@ indicator: ***i have never use it***
 
 validate: ***not clear***
 
-***
+****
+
+
 
 #### pandas.DataFrame.groupby()
 
 It is a very useful function to group the data.
 
-but i have to explain that this function  returns a kind of ***Groupby Object***
+but before talking about it ,  I have to explain that this function  returns a kind of ***Groupby Object***
 
 
 
